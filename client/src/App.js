@@ -1,6 +1,27 @@
 import {useEffect, useState} from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from "./Login"
+import UserDetails from "./UserDetails";
+import UserList from "./UserList";
+import Home from "./Home";
+
 const API_URL = "http://127.0.0.1:8080/api";
 
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/home" element={<Home/>} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/users" element={<UserList />} />
+        <Route path="/users/:username" element={<UserDetails />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+/*
 function App() {
   const [data, setData] = useState("No data :(");
   
@@ -23,5 +44,6 @@ function App() {
     </main>
   );
 }
+*/
 
 export default App;
