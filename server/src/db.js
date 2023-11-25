@@ -24,6 +24,16 @@ const User = {
   getTelegramFromMemberID: async (memberID) => {
     const [rows] = await pool.execute('SELECT Telegram FROM members WHERE MemberID = ?', [memberID]);
     return rows[0];
+  },
+
+  getListOfAllTasks: async () => {
+    const [rows] = await pool.execute('SELECT * FROM tasks');
+    return rows;
+  },
+
+  getTaskByTaskId: async (taskId) => {
+    const [rows] = await pool.execute('SELECT * FROM tasks WHERE TaskID = ?', [taskId]);
+    return rows[0];
   }
 };
 

@@ -4,6 +4,8 @@ import Login from "./Login"
 import UserDetails from "./UserDetails";
 import UserList from "./UserList";
 import Home from "./Home";
+import TaskDetails from "./TaskDetails";
+import TaskList from "./TaskList";
 
 const API_URL = "http://127.0.0.1:8080/api";
 
@@ -16,6 +18,8 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/users" element={<UserList />} />
         <Route path="/users/:username" element={<UserDetails />} />
+        <Route path="/tasks" element={<TaskList />} />
+        <Route path="/tasks/:task_id" element={<TaskDetails />} />
       </Routes>
     </BrowserRouter>
   );

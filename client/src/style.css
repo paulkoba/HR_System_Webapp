@@ -21,7 +21,7 @@ body {
 .user-info {
     margin-top: 20px;
 }
-  
+
 .user-info label {
     display: block;
     margin-bottom: 5px;
@@ -51,7 +51,7 @@ body {
     font-size: 16px;
     color: #555;
 }
-  
+
 .navbar {
     background-color: #333;
     overflow: hidden;
@@ -158,7 +158,8 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-    align-self: flex-end; /* Align button to the end of the flex container */
+    align-self: flex-end;
+    /* Align button to the end of the flex container */
 }
 
 .view-details-button:hover {
@@ -166,11 +167,13 @@ body {
 }
 
 .user-detail a {
-    color: #0077cc; /* Default link color */
+    color: #0077cc;
+    /* Default link color */
     text-decoration: none;
     transition: color 0.3s;
 }
-  
-  .user-detail a:hover {
-    color: #004466; /* Color on hover */
+
+.user-detail a:hover {
+    color: #004466;
+    /* Color on hover */
 }
