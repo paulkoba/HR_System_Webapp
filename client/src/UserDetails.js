@@ -67,7 +67,7 @@ const UserDetails = ({ }) => {
                   Back
                 </button>
               </Link>
-              <button className="edit-button">Edit</button>
+              {/* <button className="edit-button">Edit</button> */}
             </div>
           </div>
         ) : (
