@@ -41,3 +41,30 @@
     font-weight: bold;
   }
   
+  .task-list-container label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .task-list-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+  
+  .task-list-container select:hover {
+    border-color: #555;
+  }
+  
+  .task-list-container select:focus {
+    outline: none;
+    border-color: #4285f4; /* Change to your preferred focus color */
+  }
+  
+  .task-list-container option {
+    font-size: 16px;
+  }

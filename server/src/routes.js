@@ -91,6 +91,27 @@ module.exports = () => {
     }
   });
 
+  router.get('/assignees/', async (req, res) => {
+    try {
+      const telegram = await db.getUsersWithAssignedTasks();
+      console.log("Received users:", telegram)
+      res.json(telegram);
+    } catch (error) {
+      console.error('Error fetching name:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  router.get('/tasks_assigned_to/:user_id', async (req, res) => {
+    try {
+      const tasks = await db.getTasksAssignedToUser(req.params.user_id);
+      console.log("Received tasks:", tasks)
+      res.json(tasks);
+    } catch (error) {
+      console.error('Error fetching name:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
   return router;
 }

@@ -44,6 +44,20 @@ const User = {
   getAssignees: async (id) => {
     const [rows] = await pool.execute('SELECT ID FROM users_tasks WHERE TaskID = ?', [id]);
     return rows;
+  },
+
+  getUsersWithAssignedTasks: async () => {
+    const [rows] = await pool.execute(`
+      SELECT DISTINCT u.UserID, u.Username
+      FROM users_tasks ut
+      JOIN users_id u ON ut.ID = u.UserID
+    `);
+    return rows;
+  },
+
+  getTasksAssignedToUser: async (id) => {
+    const [rows] = await pool.execute('SELECT DISTINCT tasks.* FROM tasks JOIN users_tasks ON tasks.TaskID = users_tasks.TaskID WHERE users_tasks.ID = ?', [id]);
+    return rows;
   }
 };
 

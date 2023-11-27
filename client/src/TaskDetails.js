@@ -7,6 +7,7 @@ const TaskDetails = ({ }) => {
   const [task, setTask] = useState(null);
   const [author, setAuthor] = useState(null);
   const [assignees, setAssignees] = useState(null);
+  const [assigneeSelected, setAssigneeSelected] = useState(null);
   const { task_id } = useParams();
 
   useEffect(() => {
@@ -54,7 +55,6 @@ const TaskDetails = ({ }) => {
             <p>Creation Date: {task.CreationDate}</p>
             <p>Due Date: {task.DueDate}</p>
             <p>Estimate: {task.Estimate}</p>
-            <p>Attachments: {task.Attachment}</p>
             <p>Task ID: {task.TaskID}</p>
             <p>Author: {author ? author.Username : task.AuthorID}</p>
             <p>
