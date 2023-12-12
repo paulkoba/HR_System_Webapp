@@ -3,31 +3,33 @@ import React, { useState, useEffect } from 'react';
 import './TaskDetails.css';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import { endpointsPrefix } from './Keys';
+
 const TaskDetails = ({ }) => {
   const [task, setTask] = useState(null);
   const [author, setAuthor] = useState(null);
   const [assignees, setAssignees] = useState(null);
-  const [assigneeSelected, setAssigneeSelected] = useState(null);
+
   const { task_id } = useParams();
 
   useEffect(() => {
     const fetchTaskDetails = async () => {
       try {
-        const taskResponse = await fetch(`http://127.0.0.1:8080/api/tasks/${task_id}`);
+        const taskResponse = await fetch(`${endpointsPrefix}/tasks/${task_id}`);
         const taskData = await taskResponse.json();
 
         setTask(taskData);
 
-        const authorResponse = await fetch(`http://127.0.0.1:8080/api/username_from_id/${taskData.AuthorID}`);
+        const authorResponse = await fetch(`${endpointsPrefix}/username_from_id/${taskData.AuthorID}`);
         const authorData = await authorResponse.json();
 
         setAuthor(authorData);
 
-        const assigneesResponse = await fetch(`http://127.0.0.1:8080/api/assignees/${taskData.TaskID}`);
+        const assigneesResponse = await fetch(`${endpointsPrefix}/assignees/${taskData.TaskID}`);
         const assigneesData = await assigneesResponse.json();
         for (let i = 0; i < assigneesData.length; i++) {
           // Fetch username for each assignee
-          const usernameResponse = await fetch(`http://127.0.0.1:8080/api/username_from_id/${assigneesData[i].ID}`);
+          const usernameResponse = await fetch(`${endpointsPrefix}/username_from_id/${assigneesData[i].ID}`);
           const usernameData = await usernameResponse.json();
           assigneesData[i]['Username'] = usernameData.Username;
         }
@@ -63,7 +65,7 @@ const TaskDetails = ({ }) => {
                 assignees && assignees.length > 0 ? <span>
                   {
                     assignees.map((assignee) => (
-                      assignee.Username
+                      assignee.Username + " "
                     ))
                   }
                 </span>  : "None"

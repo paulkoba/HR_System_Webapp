@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './TaskList.css'
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
-
+import { endpointsPrefix } from './Keys';
 
 const TaskList = () => {
   const [taskList, setTaskList] = useState(null);
@@ -13,11 +13,11 @@ const TaskList = () => {
   useEffect(() => {
     const fetchTaskList = async () => {
       try {
-        const tasksResponse = await fetch('http://127.0.0.1:8080/api/tasks/');
+        const tasksResponse = await fetch(`${endpointsPrefix}/tasks/`);
         const taskListData = await tasksResponse.json();
         setTaskList(taskListData);
 
-        const assigneesResponse = await fetch('http://127.0.0.1:8080/api/assignees/');
+        const assigneesResponse = await fetch(`${endpointsPrefix}/assignees/`);
         const assigneesData = await assigneesResponse.json();
         setAssigneeList(assigneesData);
 
@@ -35,13 +35,13 @@ const TaskList = () => {
       if (assignee) {
         try {
           if(assignee == "any") {            
-            const tasksResponse = await fetch('http://127.0.0.1:8080/api/tasks/');
+            const tasksResponse = await fetch(`${endpointsPrefix}/tasks/`);
             const taskListData = await tasksResponse.json();
             setTaskList(taskListData);
             return;
           }
 
-          const response = await fetch(`http://127.0.0.1:8080/api/tasks_assigned_to/${assignee}`);
+          const response = await fetch(`${endpointsPrefix}/tasks_assigned_to/${assignee}`);
           
           const assignedTasksData = await response.json();
           setTaskList(assignedTasksData);

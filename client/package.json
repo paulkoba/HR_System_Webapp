@@ -8,10 +8,14 @@
     "@testing-library/user-event": "^13.5.0",
     "helmet": "^7.1.0",
     "react": "^18.2.0",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
+    "react-telegram-auth": "^1.0.4",
+    "react-telegram-login": "^1.1.2",
+    "react-use-cookie": "^1.4.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

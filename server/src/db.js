@@ -46,6 +46,11 @@ const User = {
     return rows;
   },
 
+  getUsernameFromAuthToken: async (authToken) => {
+    const [rows] = await pool.execute('SELECT Username FROM auth_keys WHERE AuthKey = ?', [authToken]);
+    return rows[0];
+  },
+
   getUsersWithAssignedTasks: async () => {
     const [rows] = await pool.execute(`
       SELECT DISTINCT u.UserID, u.Username

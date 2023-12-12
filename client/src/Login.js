@@ -1,27 +1,20 @@
 import { useEffect } from "react";
+import Navbar from "./Navbar";
+import './Login.css'
 
 const Login = () => {
-  function onTelegramAuth(user) {
-    console.log(user);
-  };
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://telegram.org/js/telegram-widget.js?22';
-    script.async = true;
-    script.setAttribute('data-telegram-login', 'hr_system_23_authenticator_bot');
-    script.setAttribute('data-size', 'large');
-    script.setAttribute('data-radius', '100');
-    script.setAttribute('onauth', 'onTelegramAuth(user)');
-  
-    document.body.appendChild(script);
-  }, []);
-  
   return (
-    <div id="login-container">
-      <h1>Login with Telegram</h1>
+    <div>
+      <Navbar/>
+      <div className="login-container">
+        <h2>You can  authorization via our telegram bot: &nbsp;
+          <a href="https://t.me/hr_system_23_bot" target="_blank" rel="noopener noreferrer">
+              @hr_system_23_bot
+          </a>
+        </h2>
+      </div>
     </div>
-  );
+  )
 };
 
 export default Login;

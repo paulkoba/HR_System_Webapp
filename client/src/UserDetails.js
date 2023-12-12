@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import './style.css'
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
+import { endpointsPrefix } from './Keys';
+
 const UserDetails = ({ }) => {
   const [user, setUser] = useState(null);
   const [manager, setManager] = useState(null);
@@ -11,11 +13,11 @@ const UserDetails = ({ }) => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const user = await fetch(`http://127.0.0.1:8080/api/users/${username}`);
+        const user = await fetch(`${endpointsPrefix}/users/${username}`);
         const userData = await user.json();
         setUser(userData);
 
-        const managerResponse = await fetch(`http://127.0.0.1:8080/api/member_id_to_telegram/${userData.MemberID}`);
+        const managerResponse = await fetch(`${endpointsPrefix}/member_id_to_telegram/${userData.MemberID}`);
         const managerData = await managerResponse.json();
         setManager(managerData);
       } catch (error) {

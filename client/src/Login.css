@@ -1,0 +1,20 @@
+.login-container {
+    max-width: 60%;
+    margin: auto;
+}
+
+.login-container h2 {
+    margin: auto;
+    text-align: center;
+}
+
+.login-container a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.login-container a:hover {
+    color: #004466;
+}

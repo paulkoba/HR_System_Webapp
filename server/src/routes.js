@@ -80,6 +80,17 @@ module.exports = () => {
     }
   });
 
+  router.get('/verify_creds/:id', async (req, res) => {
+    try {
+      const telegram = await db.getUsernameFromAuthToken(req.params.id);
+      console.log("Received users:", telegram)
+      res.json(telegram);
+    } catch (error) {
+      console.error('Error fetching name:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
   router.get('/assignees/:task_id', async (req, res) => {
     try {
       const telegram = await db.getAssignees(req.params.task_id);
