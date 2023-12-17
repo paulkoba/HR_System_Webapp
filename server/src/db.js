@@ -63,6 +63,21 @@ const User = {
   getTasksAssignedToUser: async (id) => {
     const [rows] = await pool.execute('SELECT DISTINCT tasks.* FROM tasks JOIN users_tasks ON tasks.TaskID = users_tasks.TaskID WHERE users_tasks.ID = ?', [id]);
     return rows;
+  },
+
+  validateAuthToken: async (authToken) => {
+    const [rows] = await pool.execute('SELECT Username FROM auth_keys WHERE AuthKey = ?', [authToken]);
+    return rows;
+  },
+
+  updateUser: async (username, userData) => {
+    try {
+      await pool.execute('UPDATE members SET BirthDate = ?, Email = ?, Name = ?, OnboardingDate = ?, Phone = ?, Surname = ? WHERE Telegram = ?', [new Date(userData.birthDate), userData.email, userData.name, new Date(userData.onboardingDate), userData.phone, userData.surname, username])
+      return true
+    } catch (error) {
+      console.error('Error updating user:', error); 
+    }
+    return false
   }
 };
 

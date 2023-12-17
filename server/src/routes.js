@@ -1,5 +1,16 @@
 const db = require('./db')
 
+validateAuth = async (authToken) => {
+  if (authToken !== undefined && authToken !== 'undefined') {
+    var result = await db.validateAuthToken(authToken);
+    console.log("Token is owned by user: ", result)
+    if (Array.isArray(result) && result.length > 0 && 'Username' in result[0]) {
+      return result;
+    }
+  }
+  return null;
+}
+
 module.exports = () => {
   const express = require("express");
   const router = express.Router();
@@ -120,6 +131,24 @@ module.exports = () => {
       res.json(tasks);
     } catch (error) {
       console.error('Error fetching name:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  router.post('/edit_user/:user', async (req, res) => {
+    try {
+      if (validateAuth(req.headers.authorization) == null) {
+        console.log("Couldn't verify auth token")
+        res.status(403).json({ error: 'Forbidden' });
+        return
+      }
+
+      const newUser = req.body;
+      const result = db.updateUser(req.params.user, newUser);
+      console.log("Received user:", newUser)
+      res.json({ result: result ? "ok" : "failed"});
+    } catch (error) {
+      console.error('Error editing user:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });

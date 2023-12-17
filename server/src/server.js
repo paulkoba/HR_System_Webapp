@@ -9,6 +9,8 @@ const cors = require('cors');
 
 /**** Configuration ****/
 const app = express(); 
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 function createServer() {
   const routes = require("./routes")();
@@ -16,7 +18,10 @@ function createServer() {
   app.use(bodyParser.json()); 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(morgan('combined')); 
-  app.use(cors());
+  app.use(cors({
+    origin: 'http://hrsystem.local:3000', // Update to your actual domain
+    credentials: true, // Allow sending cookies
+  }));
   app.use(express.static(path.resolve('..', 'client', 'build'))); 
   
   /**** Add routes ****/
