@@ -144,6 +144,10 @@ body {
     color: #555;
 }
 
+input[readonly], textarea[readonly] {
+    background-color: #eee;
+}
+
 .loading-message {
     text-align: center;
     font-size: 16px;

@@ -153,5 +153,23 @@ module.exports = () => {
     }
   });
 
+  router.post('/edit_task/:task_id', async (req, res) => {
+    try {
+      if (validateAuth(req.headers.authorization) == null) {
+        console.log("Couldn't verify auth token")
+        res.status(403).json({ error: 'Forbidden' });
+        return
+      }
+
+      const newTask = req.body;
+      const result = db.updateTask(req.params.task_id, newTask);
+      console.log("Received task:", newTask)
+      res.json({ result: result ? "ok" : "failed"});
+    } catch (error) {
+      console.error('Error editing user:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
   return router;
 }

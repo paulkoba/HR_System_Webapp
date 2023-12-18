@@ -78,6 +78,16 @@ const User = {
       console.error('Error updating user:', error); 
     }
     return false
+  },
+
+  updateTask: async (taskID, taskData) => {
+    try {
+      await pool.execute('UPDATE tasks SET TaskName = ?, TaskDescription = ?, DueDate = ?, Estimate = ? WHERE TaskID = ?', [taskData.taskName, taskData.taskDescription, new Date(taskData.dueDate), taskData.estimate, taskID])
+      return true
+    } catch (error) {
+      console.error('Error updating user:', error); 
+    }
+    return false
   }
 };
 
